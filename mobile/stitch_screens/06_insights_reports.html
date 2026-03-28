@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Insights &amp; Reports - GlucoCoach</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "primary": "#05b8ac",
+          "background-light": "#f5f8f8",
+          "background-dark": "#0f2321",
+          "surface-glass": "rgba(38, 43, 61, 0.65)",
+          "border-glass": "rgba(255, 255, 255, 0.08)",
+          "text-main": "#F8F9FA",
+          "text-muted": "#9CA3AF",
+          "accent-success": "#2ECC71",
+          "accent-warning": "#F0A500",
+          "accent-danger": "#FF6B6B"
+        },
+        fontFamily: {
+          "display": ["Spline Sans", "sans-serif"]
+        },
+        borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+      },
+    },
+  }
+</script>
+<style>
+  body {
+    background-color: #1E2130; /* Product context dark theme */
+  }
+  .glass-card {
+    background-color: var(--color-surface, rgba(38, 43, 61, 0.65));
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+</style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-display text-text-main antialiased bg-[#1E2130] min-h-screen flex flex-col pt-12 pb-24 relative overflow-x-hidden">
+<!-- Header -->
+<header class="px-6 pb-6 flex items-center justify-between">
+<h1 class="text-2xl font-bold tracking-tight text-text-main">Insights &amp; Reports</h1>
+<div class="h-10 w-10 rounded-full glass-card flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">person</span>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-1 px-4 flex flex-col gap-6">
+<!-- Weekly AI Insight Card -->
+<section class="glass-card rounded-[16px] p-5 relative overflow-hidden">
+<!-- Decorative background glow -->
+<div class="absolute -top-10 -right-10 w-32 h-32 bg-primary/20 rounded-full blur-[40px] pointer-events-none"></div>
+<div class="flex items-start justify-between mb-4 relative z-10">
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">colors_spark</span>
+<h2 class="text-lg font-bold text-text-main">Your Weekly Analysis</h2>
+</div>
+<button aria-label="Refresh insight" class="text-text-muted hover:text-primary transition-colors flex items-center justify-center h-8 w-8 rounded-full bg-white/5">
+<span class="material-symbols-outlined text-[20px]">refresh</span>
+</button>
+</div>
+<p class="text-[16px] leading-relaxed text-text-main/90 relative z-10 font-medium">
+        Your nighttime stability has improved by <span class="text-accent-success font-bold">15%</span> this week. However, post-lunch spikes are slightly higher. Consider reviewing your lunch bolus timing.
+      </p>
+</section>
+<!-- Monthly Report Card -->
+<section class="glass-card rounded-[16px] p-5">
+<div class="flex items-center gap-3 mb-4">
+<div class="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">description</span>
+</div>
+<div>
+<h3 class="text-md font-bold text-text-main">Endocrinologist Report</h3>
+<p class="text-sm text-text-muted">Export your 30-day AGP data</p>
+</div>
+</div>
+<button class="w-full h-14 bg-primary text-[#102322] font-bold text-[16px] rounded-[16px] flex items-center justify-center gap-2 hover:bg-primary/90 transition-colors shadow-[0_4px_14px_rgba(5,184,172,0.3)]">
+<span class="material-symbols-outlined text-[20px]">download</span>
+        Generate Report
+      </button>
+</section>
+<!-- Meal Correlation -->
+<section>
+<h3 class="text-sm font-bold text-text-muted uppercase tracking-wider mb-4 px-2">Meal Correlation</h3>
+<div class="glass-card rounded-[16px] overflow-hidden">
+<!-- High Impact Row -->
+<div class="flex items-center justify-between p-4 border-b border-white/5">
+<div class="flex items-center gap-3">
+<div class="h-10 w-10 rounded-full bg-accent-danger/10 flex items-center justify-center text-accent-danger">
+<span class="material-symbols-outlined">local_pizza</span>
+</div>
+<div>
+<p class="font-bold text-text-main">Pizza</p>
+<p class="text-xs text-text-muted">3 times this week</p>
+</div>
+</div>
+<div class="bg-accent-danger/10 px-3 py-1.5 rounded-lg flex items-center gap-1 border border-accent-danger/20">
+<span class="material-symbols-outlined text-[16px] text-accent-danger">arrow_upward</span>
+<span class="font-bold text-accent-danger text-sm">+85 mg/dL</span>
+</div>
+</div>
+<!-- Medium Impact Row -->
+<div class="flex items-center justify-between p-4 border-b border-white/5">
+<div class="flex items-center gap-3">
+<div class="h-10 w-10 rounded-full bg-accent-warning/10 flex items-center justify-center text-accent-warning">
+<span class="material-symbols-outlined">breakfast_dining</span>
+</div>
+<div>
+<p class="font-bold text-text-main">Oatmeal</p>
+<p class="text-xs text-text-muted">5 times this week</p>
+</div>
+</div>
+<div class="bg-accent-warning/10 px-3 py-1.5 rounded-lg flex items-center gap-1 border border-accent-warning/20">
+<span class="material-symbols-outlined text-[16px] text-accent-warning">arrow_upward</span>
+<span class="font-bold text-accent-warning text-sm">+45 mg/dL</span>
+</div>
+</div>
+<!-- Low Impact Row -->
+<div class="flex items-center justify-between p-4">
+<div class="flex items-center gap-3">
+<div class="h-10 w-10 rounded-full bg-accent-success/10 flex items-center justify-center text-accent-success">
+<span class="material-symbols-outlined">eco</span>
+</div>
+<div>
+<p class="font-bold text-text-main">Salad</p>
+<p class="text-xs text-text-muted">4 times this week</p>
+</div>
+</div>
+<div class="bg-accent-success/10 px-3 py-1.5 rounded-lg flex items-center gap-1 border border-accent-success/20">
+<span class="material-symbols-outlined text-[16px] text-accent-success">trending_flat</span>
+<span class="font-bold text-accent-success text-sm">+15 mg/dL</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation -->
+<div class="fixed bottom-6 left-4 right-4 h-[72px] glass-card rounded-full flex items-center justify-between px-6 z-50">
+<a class="flex flex-col items-center justify-center gap-1 w-16 text-text-muted hover:text-text-main transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px]">home</span>
+<span class="text-[10px] font-medium">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center gap-1 w-16 text-text-muted hover:text-text-main transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px]">monitoring</span>
+<span class="text-[10px] font-medium">Analytics</span>
+</a>
+<!-- Central FAB placeholder space -->
+<div class="w-16"></div>
+<a class="flex flex-col items-center justify-center gap-1 w-16 text-text-muted hover:text-text-main transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px]">history</span>
+<span class="text-[10px] font-medium">Log</span>
+</a>
+<a class="flex flex-col items-center justify-center gap-1 w-16 text-primary" href="#">
+<span class="material-symbols-outlined text-[24px]" style="font-variation-settings: 'FILL' 1;">insights</span>
+<span class="text-[10px] font-bold">Insights</span>
+</a>
+<!-- Floating Action Button (Log) -->
+<button class="absolute left-1/2 -translate-x-1/2 -top-6 h-14 w-14 bg-primary rounded-full shadow-[0_8px_20px_rgba(5,184,172,0.4)] flex items-center justify-center text-[#102322] hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-[32px]">add</span>
+</button>
+</div>
+</body></html>

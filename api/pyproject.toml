@@ -1,0 +1,30 @@
+[project]
+name = "api-cgm"
+version = "0.1.0"
+requires-python = ">=3.14"
+dependencies = [
+    "fastapi[standard]>=0.135.1",
+    "httpx>=0.28.1",
+    "numpy>=2.4.2",
+    "pandas>=3.0.1",
+    "passlib[bcrypt]>=1.7.4",
+    "psycopg2-binary>=2.9.11",
+    "pydantic>=2.12.5",
+    "pydantic-settings>=2.13.1",
+    "python-dotenv>=1.2.2",
+    "python-jose[cryptography]>=3.5.0",
+    "python-multipart>=0.0.22",
+    "reportlab>=4.4.10",
+    "requests>=2.32.5",
+    "sqlalchemy>=2.0.48",
+    "uvicorn[standard]>=0.41.0",
+]
+[tool.ruff]
+line-length = 88
+indent-width = 4
+[tool.ruff.format]
+quote-style = "double"
+[dependency-groups]
+dev = [
+    "ruff>=0.15.5",
+]

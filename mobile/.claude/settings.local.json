@@ -1,0 +1,32 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:167.99.46.249)",
+      "Bash(curl:*)",
+      "Bash(flutter pub:*)",
+      "Bash(flutter analyze:*)",
+      "Bash(xargs grep:*)",
+      "Read(//c/Users/afarhat/AppData/Local/Android/Sdk/cmdline-tools/latest/bin//**)",
+      "Read(//c/Users/afarhat/AppData/Local/Android/Sdk/tools/**)",
+      "Bash(cmd.exe /c \"where flutter\")",
+      "Bash(cmd.exe /c \"flutter --version\")",
+      "Bash(cmd.exe /c \"cd \"\"C:\\\\Users\\\\afarhat\\\\personal\\\\New folder\\\\cgm_app\"\" && flutter pub get\")",
+      "Bash(cmd.exe /c \"cd /d \"\"C:\\\\Users\\\\afarhat\\\\personal\\\\New folder\\\\cgm_app\"\" && flutter pub get 2>&1\")",
+      "Bash(powershell.exe -Command \"cd ''C:\\\\Users\\\\afarhat\\\\personal\\\\New folder\\\\cgm_app''; flutter pub get\")",
+      "Bash(powershell.exe -Command \"Get-Command flutter -ErrorAction SilentlyContinue | Select-Object -ExpandProperty Source; Get-ChildItem ''C:\\\\Users\\\\afarhat'' -Recurse -Filter ''flutter.bat'' -ErrorAction SilentlyContinue | Select-Object -First 3 FullName\")",
+      "Bash(python3 -c \"print\\(''test''\\)\")",
+      "Bash(python3 -c \":*)",
+      "Bash(mkdir -p \"C:\\\\Users\\\\afarhat\\\\personal\\\\New folder\\\\cgm_app\\\\.firecrawl\")",
+      "Bash(firecrawl scrape:*)",
+      "WebFetch(domain:www.juggluco.nl)",
+      "Bash(flutter test:*)",
+      "Bash(grep -v \"^$\")",
+      "mcp__stitch__get_screen",
+      "Bash(mkdir -p \"/c/Users/afarhat/personal/New folder/stitch_screens\")",
+      "Read(//c/Users/afarhat/personal/New folder/**)",
+      "Bash(bash \"/c/Users/afarhat/.claude/plugins/cache/claude-plugins-official/superpowers/5.0.5/skills/brainstorming/scripts/start-server.sh\" --project-dir \"/c/Users/afarhat/personal/New folder/cgm_app\")",
+      "WebFetch(domain:localhost)",
+      "Bash(flutter build:*)"
+    ]
+  }
+}

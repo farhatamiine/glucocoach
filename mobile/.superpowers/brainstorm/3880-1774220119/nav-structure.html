@@ -1,0 +1,43 @@
+<h2>What should the 5 bottom navigation tabs be?</h2>
+<p class="subtitle">The Stitch designs show a floating pill nav with 5 items — but each screen has slightly different icons. Pick the nav structure that fits the app best.</p>
+
+<div class="options">
+  <div class="option" data-choice="a" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>Home · Stats · Log (FAB) · Hypo · Profile</h3>
+      <p>Closest to Stitch designs. Central floating FAB opens a log sheet (bolus / basal / meal / hypo). Stats is a dedicated glucose report screen. Insights lives inside Stats.</p>
+    </div>
+  </div>
+  <div class="option" data-choice="b" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>Home · Stats · Insulin Log · Hypo · Profile</h3>
+      <p>Keeps the current app's tab for Insulin Log (bolus + basal tabs). No central FAB — logging always from the Insulin Log tab. Straightforward mapping from current app.</p>
+    </div>
+  </div>
+  <div class="option" data-choice="c" onclick="toggleSelect(this)">
+    <div class="letter">C</div>
+    <div class="content">
+      <h3>Home · Stats · Log (FAB) · Insights · Profile</h3>
+      <p>Matches the Insights & Reports screen nav. Hypo Tracker is not a top-level tab — it's accessible from Home quick action + a section inside the Log sheet. Insights gets its own tab.</p>
+    </div>
+  </div>
+</div>
+
+<div class="section" style="margin-top:1.5rem">
+  <h3>Current app tabs (for reference)</h3>
+  <p class="subtitle">Home · Log Hub · Stats · Insights · Profile</p>
+</div>
+
+<div class="section" style="margin-top:1rem">
+  <h3>Screens confirmed in Stitch design</h3>
+  <ul style="margin: 0.5rem 0 0 1.2rem; line-height:2">
+    <li>Login &amp; Register (new — with real JWT auth)</li>
+    <li>Home / Dashboard — glucose TIR gauge + dashboard stats + quick actions</li>
+    <li>Insulin Log — Bolus/Basal tabs + timing advisor</li>
+    <li>Hypo Tracker — summary + event list + log FAB</li>
+    <li>Insights &amp; Reports — AI insight + monthly report + meal correlation</li>
+    <li>Profile &amp; Settings — avatar, unit toggle, notification toggles</li>
+  </ul>
+</div>

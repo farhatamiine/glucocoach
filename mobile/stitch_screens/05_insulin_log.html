@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Insulin Log - GlucoCoach</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#05b8ac",
+                        "background-light": "#f5f8f8",
+                        "background-dark": "#1E2130",
+                        "surface": "rgba(38, 43, 61, 0.65)",
+                        "surface-solid": "#262B3D",
+                        "border-glass": "rgba(255, 255, 255, 0.08)",
+                        "text-main": "#F8F9FA",
+                        "text-muted": "#9CA3AF",
+                    },
+                    fontFamily: {
+                        "display": ["Spline Sans", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "1rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Spline Sans', sans-serif;
+            background-color: theme('colors.background-dark');
+            color: theme('colors.text-main');
+        }
+        .glass-card {
+            background-color: theme('colors.surface');
+            backdrop-filter: blur(12px);
+            border: 1px solid theme('colors.border-glass');
+        }
+        .bottom-nav-glass {
+            background-color: rgba(38, 43, 61, 0.85);
+            backdrop-filter: blur(16px);
+            border-top: 1px solid theme('colors.border-glass');
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-text-main min-h-screen flex flex-col font-display selection:bg-primary/30 antialiased overflow-x-hidden pb-24 relative">
+<!-- Header & Tabs -->
+<header class="sticky top-0 z-40 bg-background-dark/90 backdrop-blur-md border-b border-border-glass pt-12 pb-2 px-4">
+<div class="flex items-center justify-between mb-4">
+<h1 class="text-2xl font-bold tracking-tight text-text-main">Insulin Log</h1>
+</div>
+<div class="flex gap-8">
+<a class="flex flex-col items-center justify-center border-b-[3px] border-b-primary text-text-main pb-3 pt-2 flex-1 transition-colors" href="#">
+<p class="text-sm font-bold tracking-wide">Bolus</p>
+</a>
+<a class="flex flex-col items-center justify-center border-b-[3px] border-b-transparent text-text-muted hover:text-text-main pb-3 pt-2 flex-1 transition-colors" href="#">
+<p class="text-sm font-medium tracking-wide">Basal</p>
+</a>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-1 px-4 py-6 space-y-6">
+<!-- Timing Advisor -->
+<div class="rounded-xl bg-primary/10 border border-primary/20 p-4 flex items-start gap-3">
+<span class="material-symbols-outlined text-primary mt-0.5" style="font-variation-settings: 'FILL' 1;">info</span>
+<div>
+<h3 class="text-sm font-semibold text-primary mb-1">Timing Advisor</h3>
+<p class="text-sm text-text-muted leading-relaxed">Dose 15 mins before meals today based on current trend.</p>
+</div>
+</div>
+<!-- Log Entries -->
+<div class="space-y-3">
+<h2 class="text-xs font-semibold text-text-muted uppercase tracking-wider pl-1 mb-2">Today</h2>
+<!-- Entry 1 -->
+<div class="glass-card rounded-xl p-4 flex items-center justify-between transition-transform active:scale-[0.98]">
+<div class="flex items-center gap-4">
+<div class="flex flex-col">
+<span class="text-lg font-bold text-text-main">14:32</span>
+<span class="text-xs text-text-muted">Novolog</span>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="bg-surface-solid border border-border-glass rounded-full px-3 py-1 flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+<span class="text-xs font-medium text-text-muted">Lunch</span>
+</div>
+<div class="text-right min-w-[3rem]">
+<span class="text-xl font-bold text-primary">4 <span class="text-sm font-medium text-primary/70">U</span></span>
+</div>
+</div>
+</div>
+<!-- Entry 2 -->
+<div class="glass-card rounded-xl p-4 flex items-center justify-between transition-transform active:scale-[0.98]">
+<div class="flex items-center gap-4">
+<div class="flex flex-col">
+<span class="text-lg font-bold text-text-main">08:15</span>
+<span class="text-xs text-text-muted">Novolog</span>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="bg-surface-solid border border-border-glass rounded-full px-3 py-1 flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+<span class="text-xs font-medium text-text-muted">Breakfast</span>
+</div>
+<div class="text-right min-w-[3rem]">
+<span class="text-xl font-bold text-primary">6 <span class="text-sm font-medium text-primary/70">U</span></span>
+</div>
+</div>
+</div>
+<h2 class="text-xs font-semibold text-text-muted uppercase tracking-wider pl-1 mt-6 mb-2">Yesterday</h2>
+<!-- Entry 3 -->
+<div class="glass-card rounded-xl p-4 flex items-center justify-between transition-transform active:scale-[0.98] opacity-75">
+<div class="flex items-center gap-4">
+<div class="flex flex-col">
+<span class="text-lg font-bold text-text-main">19:40</span>
+<span class="text-xs text-text-muted">Novolog</span>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="bg-surface-solid border border-border-glass rounded-full px-3 py-1 flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+<span class="text-xs font-medium text-text-muted">Dinner</span>
+</div>
+<div class="text-right min-w-[3rem]">
+<span class="text-xl font-bold text-primary">5 <span class="text-sm font-medium text-primary/70">U</span></span>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- FAB -->
+<button aria-label="Log new dose" class="fixed bottom-24 right-6 w-14 h-14 bg-primary rounded-full flex items-center justify-center shadow-lg shadow-primary/20 hover:bg-primary/90 transition-colors z-50">
+<span class="material-symbols-outlined text-background-dark text-2xl" style="font-variation-settings: 'wght' 600;">add</span>
+</button>
+<!-- Shared Bottom Navigation -->
+<div class="fixed bottom-0 left-0 right-0 z-50 px-4 pb-6 pt-2">
+<div class="bottom-nav-glass rounded-full flex justify-between items-center px-6 py-3 shadow-lg">
+<a class="flex flex-col items-center justify-center gap-1 text-text-muted hover:text-text-main transition-colors group" href="#">
+<span class="material-symbols-outlined text-2xl group-hover:scale-110 transition-transform">house</span>
+</a>
+<a class="flex flex-col items-center justify-center gap-1 text-text-muted hover:text-text-main transition-colors group" href="#">
+<span class="material-symbols-outlined text-2xl group-hover:scale-110 transition-transform">multiline_chart</span>
+</a>
+<a class="flex flex-col items-center justify-center gap-1 text-primary group relative" href="#">
+<div class="absolute inset-0 bg-primary/20 blur-md rounded-full scale-150"></div>
+<span class="material-symbols-outlined text-2xl relative z-10" style="font-variation-settings: 'FILL' 1;">calendar_clock</span>
+</a>
+<a class="flex flex-col items-center justify-center gap-1 text-text-muted hover:text-text-main transition-colors group" href="#">
+<span class="material-symbols-outlined text-2xl group-hover:scale-110 transition-transform">warning</span>
+</a>
+<a class="flex flex-col items-center justify-center gap-1 text-text-muted hover:text-text-main transition-colors group" href="#">
+<span class="material-symbols-outlined text-2xl group-hover:scale-110 transition-transform">verified_user</span>
+</a>
+</div>
+</div>
+</body></html>

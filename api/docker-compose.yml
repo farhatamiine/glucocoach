@@ -1,0 +1,52 @@
+services:
+  glucoapi:
+    build: .
+    container_name: glucoapi
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    environment:
+      - DATABASE_URL=postgresql://amine:cgmdb@glucodb:5432/cgmdb
+      - NIGHTSCOUT_URL=${NIGHTSCOUT_URL}
+      - NIGHTSCOUT_SECRET=${NIGHTSCOUT_SECRET}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - SECRET_KEY=${SECRET_KEY}
+    depends_on:
+      glucodb:
+        condition: service_healthy
+    networks:
+      - glucoapi-network
+    volumes:
+      - reports_data:/app/reports
+
+  glucodb:
+    image: postgres:16-alpine
+    container_name: glucodb
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+    volumes:
+      - glucodb_data:/var/lib/postgresql/data
+    ports:
+      - "5433:5432" # 5433 to avoid conflict if anything uses 5432
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - glucoapi-network
+
+volumes:
+  glucodb_data:
+  reports_data:
+
+networks:
+  glucoapi-network:
+    driver: bridge

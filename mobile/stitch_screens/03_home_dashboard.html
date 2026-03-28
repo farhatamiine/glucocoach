@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>GlucoCoach - Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#00BFB3",
+              "background-light": "#f5f8f8",
+              "background-dark": "#1E2130",
+              "surface": "rgba(38, 43, 61, 0.65)",
+              "surface-solid": "#262B3D",
+              "in-range": "#2ECC71",
+              "high": "#F0A500",
+              "low": "#FF6B6B",
+              "text-main": "#F8F9FA",
+              "text-muted": "#9CA3AF"
+            },
+            fontFamily: {
+              "display": ["Spline Sans", "sans-serif"]
+            },
+            borderRadius: {
+              "DEFAULT": "0.25rem", 
+              "lg": "0.5rem", 
+              "xl": "1rem", 
+              "full": "9999px"
+            },
+            boxShadow: {
+              'glass': '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            font-family: 'Spline Sans', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        .glass-card {
+            background: rgba(38, 43, 61, 0.65);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .glass-nav {
+            background: rgba(30, 33, 48, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        
+        /* Custom Circular Progress */
+        .circular-chart {
+            display: block;
+            margin: 0 auto;
+            max-width: 80%;
+            max-height: 250px;
+        }
+        .circle-bg {
+            fill: none;
+            stroke: rgba(255, 255, 255, 0.1);
+            stroke-width: 3.8;
+        }
+        .circle {
+            fill: none;
+            stroke-width: 3.8;
+            stroke-linecap: round;
+        }
+        .circle-target {
+            stroke: #2ECC71;
+            stroke-dasharray: 78, 100;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-text-main min-h-screen flex flex-col pb-24 relative overflow-x-hidden font-display">
+<!-- Header -->
+<header class="flex items-center justify-between p-6 pt-12">
+<div class="flex items-center gap-3">
+<div class="size-12 rounded-full bg-surface-solid border border-[rgba(255,255,255,0.08)] overflow-hidden shrink-0 flex items-center justify-center">
+<img alt="User Profile Picture" class="w-full h-full object-cover" data-alt="User profile portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAoTdf2vediG1RQxfCUsFcOebL7s3P8w6anGZj_q-0LCQf6VAr4q3v83hZfDcZue9tYaHVJ_rk7Z5gur67stch_9jIo3XIhglAgVtb8Jg_HEm2_-I0c244pEUPVI3Ghs-WLjlBrpTu0tH9ilW3fC5yha8U-pm67M6WNsBAAMBwrpMnAklXdVtWsrAAmOrCDAZBaO6vtlDIPoyEGpeG8jIldmx3RRCeO-dNT8ZpmgsHJGeTCpQxNZe2TzSVKDbiz3LmJKZJWuHIoPf0"/>
+</div>
+<div>
+<p class="text-sm text-text-muted font-medium">Good morning,</p>
+<h1 class="text-xl font-bold tracking-tight">Sarah</h1>
+</div>
+</div>
+<button class="size-10 rounded-full bg-surface-solid border border-[rgba(255,255,255,0.08)] flex items-center justify-center text-text-main relative">
+<span class="material-symbols-outlined text-[22px]">notifications</span>
+<span class="absolute top-2 right-2.5 size-2 rounded-full bg-primary"></span>
+</button>
+</header>
+<main class="flex-1 px-5 flex flex-col gap-6">
+<!-- Today's Control Card -->
+<section class="glass-card rounded-xl p-6 shadow-glass flex flex-col items-center relative">
+<h2 class="w-full text-left text-base font-semibold text-text-main mb-4">Today's Control</h2>
+<!-- Circular Gauge -->
+<div class="relative w-48 h-48 mb-6 flex items-center justify-center">
+<svg class="circular-chart w-full h-full transform -rotate-90" viewbox="0 0 36 36">
+<path class="circle-bg" d="M18 2.0845
+                        a 15.9155 15.9155 0 0 1 0 31.831
+                        a 15.9155 15.9155 0 0 1 0 -31.831"></path>
+<path class="circle circle-target" d="M18 2.0845
+                        a 15.9155 15.9155 0 0 1 0 31.831
+                        a 15.9155 15.9155 0 0 1 0 -31.831"></path>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="text-4xl font-bold text-text-main tracking-tight">78<span class="text-2xl">%</span></span>
+<span class="text-xs text-text-muted font-medium uppercase tracking-wider mt-1">Time In Range</span>
+</div>
+</div>
+<!-- Progress Bars -->
+<div class="w-full flex flex-col gap-3">
+<div class="flex items-center gap-3">
+<span class="w-12 text-xs font-medium text-text-muted text-right">High</span>
+<div class="flex-1 h-2 bg-[rgba(255,255,255,0.05)] rounded-full overflow-hidden">
+<div class="h-full bg-high rounded-full" style="width: 15%"></div>
+</div>
+<span class="w-10 text-xs font-semibold text-text-main">15%</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="w-12 text-xs font-medium text-text-muted text-right">Target</span>
+<div class="flex-1 h-2 bg-[rgba(255,255,255,0.05)] rounded-full overflow-hidden">
+<div class="h-full bg-in-range rounded-full" style="width: 78%"></div>
+</div>
+<span class="w-10 text-xs font-semibold text-text-main">78%</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="w-12 text-xs font-medium text-text-muted text-right">Low</span>
+<div class="flex-1 h-2 bg-[rgba(255,255,255,0.05)] rounded-full overflow-hidden">
+<div class="h-full bg-low rounded-full" style="width: 7%"></div>
+</div>
+<span class="w-10 text-xs font-semibold text-text-main">7%</span>
+</div>
+</div>
+</section>
+<!-- Horizontal Stats -->
+<section class="w-full -mx-5 px-5 overflow-x-auto hide-scrollbar">
+<div class="flex gap-4 w-max pb-2">
+<!-- Avg Glucose -->
+<div class="glass-card rounded-xl p-4 w-[140px] flex flex-col justify-between shrink-0 h-28">
+<div class="flex items-center gap-2 text-text-muted">
+<span class="material-symbols-outlined text-[18px]">timeline</span>
+<span class="text-xs font-medium">Avg Glucose</span>
+</div>
+<div>
+<div class="flex items-baseline gap-1">
+<span class="text-2xl font-bold text-text-main">112</span>
+<span class="text-xs text-text-muted">mg/dL</span>
+</div>
+</div>
+</div>
+<!-- GMI -->
+<div class="glass-card rounded-xl p-4 w-[140px] flex flex-col justify-between shrink-0 h-28">
+<div class="flex items-center gap-2 text-text-muted">
+<span class="material-symbols-outlined text-[18px]">percent</span>
+<span class="text-xs font-medium">Est. GMI</span>
+</div>
+<div>
+<div class="flex items-baseline gap-1">
+<span class="text-2xl font-bold text-text-main">6.2</span>
+<span class="text-xs text-text-muted">%</span>
+</div>
+</div>
+</div>
+<!-- CV -->
+<div class="glass-card rounded-xl p-4 w-[140px] flex flex-col justify-between shrink-0 h-28">
+<div class="flex items-center gap-2 text-text-muted">
+<span class="material-symbols-outlined text-[18px]">show_chart</span>
+<span class="text-xs font-medium">Variability</span>
+</div>
+<div>
+<div class="flex items-baseline gap-1">
+<span class="text-2xl font-bold text-text-main">28</span>
+<span class="text-xs text-text-muted">% CV</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Dawn Phenomenon -->
+<section class="glass-card rounded-xl p-4 flex items-center justify-between">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-high text-[20px]">wb_twilight</span>
+<h3 class="text-sm font-semibold text-text-main">Dawn Phenomenon</h3>
+</div>
+<p class="text-xs text-text-muted">Slight morning rise detected</p>
+</div>
+<div class="bg-[rgba(240,165,0,0.15)] text-high px-3 py-1.5 rounded-full flex items-center gap-1 border border-[rgba(240,165,0,0.2)]">
+<span class="material-symbols-outlined text-[16px]">arrow_upward</span>
+<span class="text-sm font-bold">+24</span>
+</div>
+</section>
+<!-- Quick Actions -->
+<section class="grid grid-cols-2 gap-4 mt-2">
+<button class="bg-[rgba(0,191,179,0.1)] border border-[rgba(0,191,179,0.3)] text-primary rounded-xl p-4 flex flex-col items-center justify-center gap-2 hover:bg-[rgba(0,191,179,0.15)] transition-colors h-24">
+<span class="material-symbols-outlined text-[28px] font-light">vaccines</span>
+<span class="text-sm font-semibold">Log Bolus</span>
+</button>
+<button class="bg-[rgba(255,107,107,0.1)] border border-[rgba(255,107,107,0.3)] text-low rounded-xl p-4 flex flex-col items-center justify-center gap-2 hover:bg-[rgba(255,107,107,0.15)] transition-colors h-24">
+<span class="material-symbols-outlined text-[28px] font-light">water_drop</span>
+<span class="text-sm font-semibold">Log Hypo</span>
+</button>
+</section>
+</main>
+<!-- Bottom Navigation -->
+<div class="fixed bottom-6 left-1/2 transform -translate-x-1/2 w-[calc(100%-2.5rem)] max-w-md z-50">
+<nav class="glass-nav rounded-full px-6 py-4 flex justify-between items-center shadow-lg">
+<a class="flex flex-col items-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined text-[24px]" style="font-variation-settings: 'FILL' 1;">house</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-text-muted hover:text-text-main transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px]">show_chart</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-text-muted hover:text-text-main transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px]">plus_one</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-text-muted hover:text-text-main transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px]">list</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-text-muted hover:text-text-main transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px]">verified_user</span>
+</a>
+</nav>
+</div>
+</body></html>

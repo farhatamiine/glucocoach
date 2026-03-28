@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Register - GlucoCoach</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#05b8ac",
+                        "background-light": "#f5f8f8",
+                        "background-dark": "#1E2130", // Adjusted to PRD background
+                        "surface": "rgba(38, 43, 61, 0.65)",
+                        "surface-solid": "#262B3D",
+                        "danger": "#FF6B6B"
+                    },
+                    fontFamily: {
+                        "display": ["Spline Sans", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-family: 'Material Symbols Outlined';
+            font-weight: normal;
+            font-style: normal;
+            font-size: 24px;
+            line-height: 1;
+            letter-spacing: normal;
+            text-transform: none;
+            display: inline-block;
+            white-space: nowrap;
+            word-wrap: normal;
+            direction: ltr;
+            -webkit-font-feature-settings: 'liga';
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        /* Custom scrollbar for webkit */
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display antialiased min-h-screen flex flex-col relative overflow-hidden">
+<!-- Header (Back-to-Main Exception for Focused Views) -->
+<header class="flex items-center px-4 h-14 shrink-0 absolute top-0 w-full z-10 pt-safe">
+<a class="flex items-center justify-center w-10 h-10 rounded-full bg-surface-solid/50 hover:bg-surface-solid transition-colors text-slate-100" href="#">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</a>
+</header>
+<!-- Main Scrollable Content -->
+<main class="flex-1 overflow-y-auto pb-32 pt-16 px-4">
+<div class="max-w-md mx-auto w-full">
+<!-- HeadlineText Component Match -->
+<div class="relative flex h-auto w-full flex-col">
+<h1 class="text-white tracking-tight text-[32px] font-bold leading-tight text-left pb-2 pt-6">Create Account</h1>
+<p class="text-slate-300 text-base font-normal leading-normal pb-6 pt-1">Let's personalize your experience</p>
+<form class="flex flex-col gap-5">
+<!-- Account Details Section -->
+<div class="space-y-4">
+<label class="flex flex-col w-full relative">
+<span class="text-sm font-medium text-slate-300 mb-1 ml-1">Full Name</span>
+<input class="form-input flex w-full flex-1 rounded-2xl text-white bg-surface-solid border border-white/5 focus:border-primary focus:ring-1 focus:ring-primary h-14 px-4 text-base placeholder:text-slate-500 transition-colors" placeholder="e.g. Jane Doe" required="" type="text" value=""/>
+</label>
+<label class="flex flex-col w-full relative">
+<span class="text-sm font-medium text-slate-300 mb-1 ml-1">Email Address</span>
+<input class="form-input flex w-full flex-1 rounded-2xl text-white bg-surface-solid border border-white/5 focus:border-primary focus:ring-1 focus:ring-primary h-14 px-4 text-base placeholder:text-slate-500 transition-colors" placeholder="jane@example.com" required="" type="email" value=""/>
+</label>
+<label class="flex flex-col w-full relative">
+<span class="text-sm font-medium text-slate-300 mb-1 ml-1">Password</span>
+<input class="form-input flex w-full flex-1 rounded-2xl text-white bg-surface-solid border border-white/5 focus:border-primary focus:ring-1 focus:ring-primary h-14 px-4 text-base placeholder:text-slate-500 transition-colors" placeholder="••••••••" required="" type="password" value=""/>
+</label>
+</div>
+<div class="h-px w-full bg-white/5 my-2"></div>
+<!-- Medical Baseline Section -->
+<div class="space-y-5">
+<h2 class="text-lg font-semibold text-white">Medical Baseline</h2>
+<!-- Unit Preference Toggle -->
+<div class="flex flex-col w-full">
+<span class="text-sm font-medium text-slate-300 mb-2 ml-1">Glucose Unit</span>
+<div class="flex p-1 bg-surface-solid rounded-full h-12 relative border border-white/5">
+<!-- Active Indicator (simulated) -->
+<div class="absolute inset-y-1 left-1 w-[calc(50%-4px)] bg-primary rounded-full transition-all duration-300 shadow-sm"></div>
+<button class="flex-1 relative z-10 text-white font-medium text-sm flex items-center justify-center rounded-full" type="button">
+                                    mg/dL
+                                </button>
+<button class="flex-1 relative z-10 text-slate-400 font-medium text-sm flex items-center justify-center rounded-full hover:text-white transition-colors" type="button">
+                                    mmol/L
+                                </button>
+</div>
+</div>
+<!-- Side-by-Side Inputs -->
+<div class="grid grid-cols-2 gap-3">
+<label class="flex flex-col w-full relative">
+<span class="text-sm font-medium text-slate-300 mb-1 ml-1">Height</span>
+<div class="relative">
+<input class="form-input flex w-full flex-1 rounded-2xl text-white bg-surface-solid border border-white/5 focus:border-primary focus:ring-1 focus:ring-primary h-14 pl-4 pr-12 text-base placeholder:text-slate-500 transition-colors" placeholder="170" type="number" value=""/>
+<span class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 text-sm font-medium">cm</span>
+</div>
+</label>
+<label class="flex flex-col w-full relative">
+<span class="text-sm font-medium text-slate-300 mb-1 ml-1">Weight</span>
+<div class="relative">
+<input class="form-input flex w-full flex-1 rounded-2xl text-white bg-surface-solid border border-white/5 focus:border-primary focus:ring-1 focus:ring-primary h-14 pl-4 pr-12 text-base placeholder:text-slate-500 transition-colors" placeholder="65" type="number" value=""/>
+<span class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 text-sm font-medium">kg</span>
+</div>
+</label>
+</div>
+</div>
+</form>
+</div>
+<p class="text-center text-sm text-slate-400 mt-8 mb-4">
+                Already have an account? <a class="text-primary font-semibold hover:underline" href="#">Sign In</a>
+</p>
+</div>
+</main>
+<!-- Sticky Bottom CTA -->
+<div class="fixed bottom-0 left-0 w-full p-4 bg-background-dark/80 backdrop-blur-md border-t border-white/5 z-20 pb-safe">
+<div class="max-w-md mx-auto w-full">
+<button class="w-full h-14 rounded-2xl bg-primary hover:bg-primary/90 text-white font-semibold text-lg flex items-center justify-center transition-all shadow-[0_4px_14px_rgba(5,184,172,0.39)]">
+                Create Account
+            </button>
+</div>
+</div>
+</body></html>

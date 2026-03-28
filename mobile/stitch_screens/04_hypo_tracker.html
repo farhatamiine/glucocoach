@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Hypo Tracker - GlucoCoach</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#05b8ac",
+                        "background-light": "#f5f8f8",
+                        "background-dark": "#1E2130",
+                        "surface": "rgba(38, 43, 61, 0.65)",
+                        "surface-solid": "#262B3D",
+                        "text-main": "#F8F9FA",
+                        "text-muted": "#9CA3AF",
+                        "in-range": "#2ECC71",
+                        "high": "#F0A500",
+                        "low": "#FF6B6B",
+                        "border-glass": "rgba(255, 255, 255, 0.08)"
+                    },
+                    fontFamily: {
+                        "display": ["Spline Sans", "sans-serif"],
+                        "body": ["Spline Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "md": "16px",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    boxShadow: {
+                        'glass': '0 4px 30px rgba(0, 0, 0, 0.1)',
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Spline Sans', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        .glass-card {
+            background-color: theme('colors.surface');
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid theme('colors.border-glass');
+            box-shadow: theme('boxShadow.glass');
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-text-main min-h-screen pb-[100px] pt-12 antialiased selection:bg-primary/30">
+<!-- Header -->
+<header class="px-6 pb-6 pt-4 sticky top-0 z-50 bg-background-dark/80 backdrop-blur-md">
+<h1 class="text-[28px] font-bold tracking-tight text-text-main">Hypo Tracker</h1>
+<p class="text-text-muted text-sm mt-1">Review your low events</p>
+</header>
+<main class="px-6 space-y-6">
+<!-- Summary Dashboard -->
+<section class="glass-card rounded-md p-5">
+<h2 class="text-sm font-semibold text-text-muted uppercase tracking-wider mb-4">Last 7 Days</h2>
+<div class="grid grid-cols-2 gap-4">
+<div class="space-y-1">
+<p class="text-xs font-medium text-text-muted">Total Events</p>
+<p class="text-[32px] font-bold text-low leading-none">3</p>
+</div>
+<div class="space-y-1">
+<p class="text-xs font-medium text-text-muted">Avg Lowest</p>
+<div class="flex items-baseline gap-1">
+<p class="text-[32px] font-bold text-text-main leading-none">54</p>
+<span class="text-sm text-text-muted">mg/dL</span>
+</div>
+</div>
+<div class="space-y-1 pt-2 border-t border-border-glass">
+<p class="text-xs font-medium text-text-muted">Avg Duration</p>
+<p class="text-[24px] font-semibold text-text-main leading-none">25m</p>
+</div>
+<div class="space-y-1 pt-2 border-t border-border-glass">
+<p class="text-xs font-medium text-text-muted">Day/Night Split</p>
+<p class="text-[24px] font-semibold text-text-main leading-none">2 / 1</p>
+</div>
+</div>
+</section>
+<!-- Empty State (Hidden by default, shown for demonstration if events are removed) -->
+<!--
+        <section class="glass-card rounded-md p-8 text-center flex flex-col items-center justify-center min-h-[200px]">
+            <div class="w-16 h-16 rounded-full bg-in-range/20 flex items-center justify-center mb-4 text-in-range">
+                <span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">celebration</span>
+            </div>
+            <h3 class="text-xl font-bold text-in-range mb-2">0 Hypos this week!</h3>
+            <p class="text-text-muted text-sm max-w-[200px]">Great job staying in range. Keep it up!</p>
+        </section>
+        -->
+<!-- Event List -->
+<section>
+<div class="flex items-center justify-between mb-4">
+<h2 class="text-base font-semibold text-text-main">Recent Events</h2>
+<button class="text-sm text-primary font-medium hover:text-primary/80 transition-colors">See All</button>
+</div>
+<div class="space-y-3">
+<!-- Event Item 1 -->
+<article class="glass-card rounded-md p-4 flex items-center justify-between active:scale-[0.98] transition-transform">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-low/10 border border-low/20 flex flex-col items-center justify-center text-low">
+<span class="text-[20px] font-bold leading-none">52</span>
+</div>
+<div>
+<p class="font-semibold text-text-main">Today, 14:30</p>
+<p class="text-sm text-text-muted flex items-center gap-1.5 mt-0.5">
+<span class="material-symbols-outlined text-[14px]">timer</span> 22 mins
+                                <span class="mx-1 opacity-50">•</span>
+<span class="material-symbols-outlined text-[14px]">local_cafe</span> 15g juice
+                            </p>
+</div>
+</div>
+<span class="material-symbols-outlined text-text-muted">chevron_right</span>
+</article>
+<!-- Event Item 2 -->
+<article class="glass-card rounded-md p-4 flex items-center justify-between active:scale-[0.98] transition-transform">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-low/10 border border-low/20 flex flex-col items-center justify-center text-low">
+<span class="text-[20px] font-bold leading-none">58</span>
+</div>
+<div>
+<p class="font-semibold text-text-main">Yesterday, 03:15</p>
+<p class="text-sm text-text-muted flex items-center gap-1.5 mt-0.5">
+<span class="material-symbols-outlined text-[14px]">timer</span> 35 mins
+                                <span class="mx-1 opacity-50">•</span>
+<span class="material-symbols-outlined text-[14px]">medication</span> Glucose tabs
+                            </p>
+</div>
+</div>
+<span class="material-symbols-outlined text-text-muted">chevron_right</span>
+</article>
+<!-- Event Item 3 -->
+<article class="glass-card rounded-md p-4 flex items-center justify-between active:scale-[0.98] transition-transform">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-low/10 border border-low/20 flex flex-col items-center justify-center text-low">
+<span class="text-[20px] font-bold leading-none">61</span>
+</div>
+<div>
+<p class="font-semibold text-text-main">Mon, 11:00</p>
+<p class="text-sm text-text-muted flex items-center gap-1.5 mt-0.5">
+<span class="material-symbols-outlined text-[14px]">timer</span> 18 mins
+                                <span class="mx-1 opacity-50">•</span>
+<span class="material-symbols-outlined text-[14px]">restaurant</span> Snack
+                            </p>
+</div>
+</div>
+<span class="material-symbols-outlined text-text-muted">chevron_right</span>
+</article>
+</div>
+</section>
+</main>
+<!-- FAB for logging Hypo -->
+<button aria-label="Log Hypo" class="fixed right-6 bottom-28 w-14 h-14 bg-low text-white rounded-full flex items-center justify-center shadow-lg shadow-low/30 hover:bg-low/90 active:scale-95 transition-all z-40">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'wght' 600;">add</span>
+</button>
+<!-- Shared Bottom Nav -->
+<div class="fixed bottom-6 left-6 right-6 z-50">
+<nav class="glass-card rounded-full flex justify-between items-center px-6 py-3 shadow-2xl">
+<a class="flex flex-col items-center justify-center text-text-muted hover:text-text-main transition-colors group" href="#">
+<span class="material-symbols-outlined text-[24px] group-hover:-translate-y-1 transition-transform">house</span>
+</a>
+<a class="flex flex-col items-center justify-center text-text-muted hover:text-text-main transition-colors group" href="#">
+<span class="material-symbols-outlined text-[24px] group-hover:-translate-y-1 transition-transform">show_chart</span>
+</a>
+<a class="flex flex-col items-center justify-center text-text-muted hover:text-text-main transition-colors group" href="#">
+<span class="material-symbols-outlined text-[24px] group-hover:-translate-y-1 transition-transform">water_drop</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary relative group" href="#">
+<span class="material-symbols-outlined text-[24px] group-hover:-translate-y-1 transition-transform" style="font-variation-settings: 'FILL' 1;">warning</span>
+<span class="absolute -bottom-2 w-1 h-1 bg-primary rounded-full"></span>
+</a>
+<a class="flex flex-col items-center justify-center text-text-muted hover:text-text-main transition-colors group" href="#">
+<span class="material-symbols-outlined text-[24px] group-hover:-translate-y-1 transition-transform">search_gear</span>
+</a>
+</nav>
+</div>
+</body></html>
