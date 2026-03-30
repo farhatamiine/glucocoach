@@ -17,16 +17,18 @@ def get_glucose_service() -> GlucoseService:
     return GlucoseService(settings=settings)
 
 
-def get_bolus_service(db: Session = Depends(get_db)) -> BolusService:
-    return BolusService(db=db, glucose_service=get_glucose_service())
+def get_bolus_service(
+    db: Session = Depends(get_db), glucose_service:GlucoseService=Depends(get_glucose_service)
+) -> BolusService:
+    return BolusService(db=db, glucose_service=glucose_service)
 
 
 def get_basal_service(db: Session = Depends(get_db)) -> BasalService:
     return BasalService(db=db)
 
 
-def get_hypo_service(db: Session = Depends(get_db)) -> HypoService:
-    return HypoService(db=db, glucose_service=get_glucose_service())
+def get_hypo_service(db: Session = Depends(get_db),glucose_service:GlucoseService=Depends(get_glucose_service)) -> HypoService:
+    return HypoService(db=db, glucose_service=glucose_service)
 
 
 def get_insights_service(
@@ -35,7 +37,12 @@ def get_insights_service(
 ) -> InsightsService:
     settings = get_settings()
     meal_service = MealService(db)
-    return InsightsService(db=db, glucose_service=glucose_service, meal_service=meal_service, settings=settings)
+    return InsightsService(
+        db=db,
+        glucose_service=glucose_service,
+        meal_service=meal_service,
+        settings=settings,
+    )
 
 
 def get_monthly_report_service(
