@@ -2,6 +2,7 @@ from datetime import date, datetime, timedelta, timezone
 from typing import Any, Dict, Optional
 
 import httpx
+from api.mock.mocks import MOCK_INSIGHT
 from sqlalchemy import func
 from sqlalchemy.orm import Session
 
@@ -14,10 +15,6 @@ from services.glucose_service import GlucoseService
 from services.meal_service import MealService
 
 logger = get_logger(__name__)
-
-ANTHROPIC_API_URL = "https://api.anthropic.com/v1/messages"
-ANTHROPIC_MODEL = "claude-sonnet-4-20250514"
-MOCK_MODE = True
 
 
 class InsightsService:
@@ -151,14 +148,8 @@ Max 200 words."""
     async def _call_claude(self, prompt: str) -> tuple[str, int]:
         """Call Anthropic API. Returns (insight_text, tokens_used)."""
 
-        if MOCK_MODE:
-            return (
-                "Mock insight: Your TIR is 68% which is approaching the 70% target. "
-                "Your worst period is morning, likely linked to the MODERATE dawn phenomenon detected. "
-                "CV at 38% is slightly above the 36% target — focus on consistent meal timing. "
-                "Discuss basal adjustment for overnight with your doctor.",
-                0,  # 0 tokens used
-            )
+        if self.settings.mock_mode:
+            return MOCK_INSIGHT
 
         headers = {
             "x-api-key": self.settings.anthropic_api_key,
@@ -166,13 +157,13 @@ Max 200 words."""
             "content-type": "application/json",
         }
         payload: Dict[str, Any] = {
-            "model": ANTHROPIC_MODEL,
+            "model": self.settings.anthropic_api_model,
             "max_tokens": 400,
             "messages": [{"role": "user", "content": prompt}],
         }
         async with httpx.AsyncClient(timeout=30.0) as client:
             response = await client.post(
-                ANTHROPIC_API_URL, headers=headers, json=payload
+                self.settings.anthropic_api_url, headers=headers, json=payload
             )
             response.raise_for_status()
             data = response.json()

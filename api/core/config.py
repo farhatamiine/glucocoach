@@ -9,11 +9,13 @@ class Settings(BaseSettings):
     nightscout_url: str
     nightscout_secret: str
     api_key: str
-    openai_api_key: str = ""
     database_url: str
     anthropic_api_key: str = ""
+    anthropic_api_url: str = ""
+    anthropic_api_model: str
     secret_key: str = ""
     model_config = SettingsConfigDict(env_file=".env", extra="ignore")
+    mock_mode: bool = True
 
 
 @lru_cache()

@@ -5,6 +5,7 @@ from typing import Any, Dict, List, Optional, Tuple
 
 import httpx
 import numpy as np
+from api.mock.mocks import MOCK_REPORT
 from reportlab.platypus import Flowable
 from sqlalchemy import func
 from sqlalchemy.orm import Session
@@ -26,10 +27,6 @@ from services.glucose_service import GlucoseService
 logger = get_logger(__name__)
 REPORTS_DIR = "/app/reports"
 os.makedirs(REPORTS_DIR, exist_ok=True)
-
-ANTHROPIC_API_URL = "https://api.anthropic.com/v1/messages"
-ANTHROPIC_MODEL = "claude-sonnet-4-20250514"
-MOCK_MODE = True  # flip to False when API key ready
 
 
 class MonthlyReportService:
@@ -79,7 +76,9 @@ class MonthlyReportService:
 
     def _basal_assessment(self, user_id: int, cutoff: datetime) -> BasalAssessment:
         records: List[BasalLog] = (
-            self.db.query(BasalLog).filter(BasalLog.user_id == user_id, BasalLog.timestamp >= cutoff).all()
+            self.db.query(BasalLog)
+            .filter(BasalLog.user_id == user_id, BasalLog.timestamp >= cutoff)
+            .all()
         )
         total = len(records)
         avg_units_raw: Any = (
@@ -120,7 +119,9 @@ class MonthlyReportService:
 
     def _bolus_patterns(self, user_id: int, cutoff: datetime) -> BolusPatternsReport:
         records: List[BolusLog] = (
-            self.db.query(BolusLog).filter(BolusLog.user_id == user_id, BolusLog.timestamp >= cutoff).all()
+            self.db.query(BolusLog)
+            .filter(BolusLog.user_id == user_id, BolusLog.timestamp >= cutoff)
+            .all()
         )
         total = len(records)
         avg_units_raw: Any = (
@@ -159,7 +160,9 @@ class MonthlyReportService:
 
     def _hypo_analysis(self, user_id: int, cutoff: datetime) -> HypoAnalysis:
         records: List[HypoEvent] = (
-            self.db.query(HypoEvent).filter(HypoEvent.user_id == user_id, HypoEvent.started_at >= cutoff).all()
+            self.db.query(HypoEvent)
+            .filter(HypoEvent.user_id == user_id, HypoEvent.started_at >= cutoff)
+            .all()
         )
         total = len(records)
 
@@ -238,7 +241,7 @@ HYPOGLYCAEMIA:
 - Average lowest BG:  {data["hypo"]["avg_lowest_value"]} mg/dL
 - Average duration:   {data["hypo"]["avg_duration_min"]} min
 - Nocturnal hypos:    {data["hypo"]["nocturnal_count"]}
-- Most common hour:   {f'{data["hypo"]["most_common_hour"]}:00' if data["hypo"]["most_common_hour"] is not None else "N/A"}
+- Most common hour:   {f"{data['hypo']['most_common_hour']}:00" if data["hypo"]["most_common_hour"] is not None else "N/A"}
 - Most treated with:  {data["hypo"]["most_common_treatment"]}
 
 Please provide a structured clinical report with:
@@ -255,34 +258,8 @@ Be clinical, precise, and data-driven. Max 400 words. Do not diagnose or prescri
     # ── Claude API ─────────────────────────────────────────────────────────
 
     async def _call_claude(self, prompt: str) -> Tuple[str, int]:
-        if MOCK_MODE:
-            return (
-                """OVERALL ASSESSMENT
-Glucose control is suboptimal with TIR below the 70% target. Variability is elevated requiring attention.
-
-GLUCOSE TRENDS
-Week-over-week data shows inconsistent control. Morning periods show the highest glucose levels, consistent with dawn phenomenon.
-
-BASAL INSULIN
-Basal dosing appears consistent. However, the MODERATE dawn phenomenon suggests the overnight basal rate may be insufficient to counteract hepatic glucose output in early morning hours.
-
-BOLUS INSULIN
-Correction bolus frequency is notable. Pre-meal glucose averaging above target suggests either delayed bolus timing or insufficient insulin-to-carb ratio for high GI meals.
-
-HYPOGLYCAEMIA RISK
-Hypo frequency requires monitoring. Nocturnal events represent a safety concern and warrant urgent attention. Average duration suggests treatment response is adequate.
-
-KEY CONCERNS
-1. Dawn phenomenon driving morning hyperglycaemia
-2. Nocturnal hypoglycaemia risk
-3. CV above 36% target indicating unstable control
-
-RECOMMENDATIONS
-1. Discuss basal insulin timing adjustment with your endocrinologist to address dawn phenomenon
-2. Consider CGM alarm thresholds for nocturnal hypo detection
-3. Review insulin-to-carb ratios for high GI meals with your diabetes team""",
-                0,
-            )
+        if self.settings.mock_mode:
+            return MOCK_REPORT
 
         headers = {
             "x-api-key": self.settings.anthropic_api_key,
@@ -290,13 +267,13 @@ RECOMMENDATIONS
             "content-type": "application/json",
         }
         payload: Dict[str, Any] = {
-            "model": ANTHROPIC_MODEL,
+            "model": self.settings.anthropic_api_model,
             "max_tokens": 800,
             "messages": [{"role": "user", "content": prompt}],
         }
         async with httpx.AsyncClient(timeout=30.0) as client:
             response = await client.post(
-                ANTHROPIC_API_URL, headers=headers, json=payload
+                self.settings.anthropic_api_url, headers=headers, json=payload
             )
             response.raise_for_status()
             data = response.json()
@@ -655,7 +632,9 @@ RECOMMENDATIONS
 
     # ── Main entry point ───────────────────────────────────────────────────
 
-    async def generate_monthly_report(self, user_id: int, days: int = 30) -> MonthlyReportResponse:
+    async def generate_monthly_report(
+        self, user_id: int, days: int = 30
+    ) -> MonthlyReportResponse:
         cutoff = datetime.now() - timedelta(days=days)
 
         # overall glucose
